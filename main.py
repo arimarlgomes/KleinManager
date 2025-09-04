@@ -1,4 +1,6 @@
 ﻿import os, sys
+import asyncio
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse
@@ -7,41 +9,49 @@ from fastapi.templating import Jinja2Templates
 from app.core.config import settings
 from app.core.database import engine, Base
 from app.api.routes import router
+from app.services.notification_service import Notification
+from app.services.background_tasks import background_task_manager
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
-# Detect base path (source vs exe)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    print("🚀 Starting KleinManager...")
+    print("📋 Starting background monitoring tasks...")
+    await background_task_manager.start_all_tasks()
+    yield
+    # Shutdown
+    print("🛑 Stopping background monitoring tasks...")
+    await background_task_manager.stop_all_tasks()
+    print("👋 KleinManager shutdown complete")
+
 if getattr(sys, 'frozen', False):
     base_path = sys._MEIPASS
 else:
     base_path = os.path.abspath(".")
 
-# Initialize FastAPI app
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    debug=settings.DEBUG
+    debug=settings.DEBUG,
+    lifespan=lifespan
 )
 
-# Mount static files
 static_dir = os.path.join(base_path, "static")
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
-# Setup templates
 templates = Jinja2Templates(directory=os.path.join(base_path, "templates"))
 
-# Include API routes
 app.include_router(router)
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    """Serve the main application page"""
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/images/{filename}")
 async def get_image(filename: str):
-    """Serve stored images"""
     file_path = os.path.join(settings.IMAGE_STORAGE_PATH, filename)
     if os.path.exists(file_path):
         return FileResponse(file_path)
