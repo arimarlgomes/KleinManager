@@ -258,9 +258,6 @@ cp -r static/ dist/KleinManager/static/
 ### Getting Help
 
 - **Issues**: Report bugs on GitHub Issues
-- **Discussions**: Join community discussions
-- **Documentation**: Check the wiki for detailed guides
-- **Email**: Contact support at support@kleinmanager.com
 
 ## 📄 License
 
@@ -278,4 +275,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for the Kleinanzeigen community**
 
-*KleinManager is not affiliated with or endorsed by eBay Kleinanzeigen. It's an independent tool created to help users better manage their purchases.*
+*KleinManager is not affiliated with or endorsed by Kleinanzeigen. It's an independent tool created to help users better manage their purchases.*
