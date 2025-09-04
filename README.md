@@ -2,7 +2,8 @@
 
 KleinManager is a comprehensive web-based order management application designed specifically for tracking and managing Kleinanzeigen purchases. Built with FastAPI, it provides a modern, responsive interface for monitoring orders, tracking packages, watching price changes, and analyzing purchase statistics.
 
-<img width="2546" height="1295" alt="KleinManager Dashboard" src="https://github.com/user-attachments/assets/75b6cf28-3f52-4581-acfa-8a8b0e559948" />
+<img width="2540" height="1290" alt="Screenshot 2025-09-04 170731" src="https://github.com/user-attachments/assets/7dde9388-3d46-4b14-9c08-108ac20fc129" />
+
 
 ## 🚀 Key Features
 
