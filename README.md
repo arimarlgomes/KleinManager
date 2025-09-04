@@ -5,6 +5,12 @@ It runs a local web server and automatically opens the application in the browse
 
 ---
 
+
+<img width="2546" height="1295" alt="Screenshot 2025-09-03 155620" src="https://github.com/user-attachments/assets/75b6cf28-3f52-4581-acfa-8a8b0e559948" />
+
+
+
+
 ## 📦 Requirements
 
 - **Python 3.11+**
