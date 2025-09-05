@@ -2,7 +2,8 @@
 
 KleinManager is a comprehensive web-based order management application designed specifically for tracking and managing Kleinanzeigen purchases. Built with FastAPI, it provides a modern, responsive interface for monitoring orders, tracking packages, watching price changes, and analyzing purchase statistics.
 
-<img width="2546" height="1295" alt="KleinManager Dashboard" src="https://github.com/user-attachments/assets/75b6cf28-3f52-4581-acfa-8a8b0e559948" />
+<img width="2540" height="1290" alt="Screenshot 2025-09-04 170731" src="https://github.com/user-attachments/assets/7dde9388-3d46-4b14-9c08-108ac20fc129" />
+
 
 ## 🚀 Key Features
 
@@ -208,30 +209,6 @@ KleinManager/
 - **Linux**: Compatible (build executable manually)
 - **Web Browsers**: Chrome, Firefox, Safari, Edge
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our contributing guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Setup
-```bash
-# Install development dependencies
-pip install -r requirements-dev.txt
-
-# Run tests
-pytest
-
-# Format code
-black .
-
-# Lint code
-flake8
-```
 
 ## 🐛 Troubleshooting
 
@@ -258,9 +235,6 @@ cp -r static/ dist/KleinManager/static/
 ### Getting Help
 
 - **Issues**: Report bugs on GitHub Issues
-- **Discussions**: Join community discussions
-- **Documentation**: Check the wiki for detailed guides
-- **Email**: Contact support at support@kleinmanager.com
 
 ## 📄 License
 
@@ -278,4 +252,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for the Kleinanzeigen community**
 
-*KleinManager is not affiliated with or endorsed by eBay Kleinanzeigen. It's an independent tool created to help users better manage their purchases.*
+*KleinManager is not affiliated with or endorsed by Kleinanzeigen. It's an independent tool created to help users better manage their purchases.*
