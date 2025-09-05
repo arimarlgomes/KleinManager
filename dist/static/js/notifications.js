@@ -48,22 +48,20 @@ class NotificationsManager extends KleinManagerCore {
 
     toggleNotifications() {
         this.notificationsOpen = !this.notificationsOpen;
-        const modal = document.getElementById('notificationsModal');
+        const panel = document.getElementById('notificationsPanel');
 
         if (this.notificationsOpen) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            panel.classList.remove('hidden');
             this.renderNotifications();
+            // Position the panel relative to the sidebar notification button
+            const rect = document.getElementById('sidebar').getBoundingClientRect();
+            panel.style.left = `${rect.right + 10}px`;
+            panel.style.top = '50%';
+            panel.style.transform = 'translateY(-50%)';
+            panel.style.right = 'auto';
         } else {
-            this.closeNotifications();
+            panel.classList.add('hidden');
         }
-    }
-
-    closeNotifications() {
-        this.notificationsOpen = false;
-        const modal = document.getElementById('notificationsModal');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
     }
 
     renderNotifications() {
@@ -71,23 +69,21 @@ class NotificationsManager extends KleinManagerCore {
 
         if (this.notifications.length === 0) {
             container.innerHTML = `
-                <div class="p-6 text-center text-gray-400">
-                    <i class="fas fa-bell-slash text-3xl mb-3 text-gray-500"></i>
+                <div class="p-4 text-center text-gray-400">
+                    <i class="fas fa-bell-slash text-2xl mb-2"></i>
                     <p>No new notifications</p>
                 </div>
             `;
         } else {
             container.innerHTML = this.notifications.map(notification => `
-                <div class="p-4 border-b border-gray-700 hover:bg-gray-700 cursor-pointer transition-colors duration-200"
+                <div class="p-3 border-b border-gray-700 hover:bg-gray-700 cursor-pointer"
                      onclick="app.markNotificationRead(${notification.id})">
                     <div class="flex items-start gap-3">
-                        <div class="p-2 bg-blue-600 rounded-full">
-                            <i class="fas ${this.getNotificationIcon(notification.type)} text-white text-sm"></i>
-                        </div>
+                        <i class="fas ${this.getNotificationIcon(notification.type)} text-blue-400 mt-1"></i>
                         <div class="flex-1">
                             <p class="text-white font-medium text-sm">${notification.title}</p>
-                            <p class="text-gray-400 text-xs mt-1">${notification.message}</p>
-                            <p class="text-gray-500 text-xs mt-2">${new Date(notification.created_at).toLocaleString()}</p>
+                            <p class="text-gray-400 text-xs">${notification.message}</p>
+                            <p class="text-gray-500 text-xs mt-1">${new Date(notification.created_at).toLocaleString()}</p>
                         </div>
                     </div>
                 </div>
