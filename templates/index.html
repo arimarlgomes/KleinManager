@@ -214,58 +214,100 @@
                 </div>
 
                 <!-- Orders Section -->
-                <div id="orders" class="section hidden">
-                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6 lg:mb-8 mt-12 lg:mt-0">
-                        <h2 class="text-2xl lg:text-3xl font-bold text-white" data-i18n="orders.title">Orders</h2>
-                        <div class="flex flex-col sm:flex-row gap-2 lg:gap-3 w-full lg:w-auto">
-                            <input type="text" id="searchInput"
-                                   placeholder="Search..."
-                                   data-i18n-placeholder="orders.searchPlaceholder"
-                                   oninput="app.loadOrders()"
-                                   class="px-3 lg:px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-blue-500 flex-1 lg:flex-none lg:w-48">
-                            <select id="statusFilter" onchange="app.loadOrders()" class="px-3 lg:px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-blue-500">
-                                <option value="" data-i18n="orders.allStatus">All Status</option>
-                                <option value="Ordered" data-i18n="status.ordered">Ordered</option>
-                                <option value="Shipped" data-i18n="status.shipped">Shipped</option>
-                                <option value="Delivered" data-i18n="status.delivered">Delivered</option>
-                            </select>
-                            <select id="colorFilter" onchange="app.loadOrders()" class="px-3 lg:px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-blue-500">
-                                <option value="">All Colors</option>
-                            </select>
-                            <button onclick="app.toggleView()" class="px-3 lg:px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors">
-                                <i id="viewToggleIcon" class="fas fa-list"></i>
-                            </button>
-                            <button onclick="app.showAddOrderForm()" class="px-3 lg:px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg">
-                                <i class="fas fa-plus mr-2"></i>
-                                <span class="hidden sm:inline" data-i18n="actions.addOrder">Add Order</span>
-                            </button>
-                        </div>
-                    </div>
+               <div id="orders" class="section hidden">
+    <div class="mb-6 mt-12 lg:mt-0">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+            <h2 class="text-3xl font-bold text-white flex items-center">
+                <i class="fas fa-shopping-bag mr-3 text-blue-500"></i>
+                <span data-i18n="orders.title">Orders</span>
+            </h2>
 
-                    <!-- Add Order Form -->
-                    <div id="addOrderForm" class="hidden bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl p-4 lg:p-6 shadow-lg border border-gray-600 mb-6 lg:mb-8">
-                        <h3 class="text-lg font-semibold text-white mb-4" data-i18n="orders.addNew">Add New Order</h3>
-                        <form onsubmit="app.addOrder(event)" class="flex flex-col lg:flex-row gap-4">
-                            <input type="url" id="orderUrl"
-                                   placeholder="Enter Kleinanzeigen URL..."
-                                   data-i18n-placeholder="orders.urlPlaceholder"
-                                   required
-                                   class="flex-1 px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <div class="flex gap-2">
-                                <button type="submit" class="flex-1 lg:flex-none px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all shadow-lg">
-                                    <i class="fas fa-save mr-2"></i>
-                                    <span data-i18n="actions.save">Save</span>
-                                </button>
-                                <button type="button" onclick="app.hideAddOrderForm()" class="flex-1 lg:flex-none px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                                    <i class="fas fa-times mr-2"></i>
-                                    <span data-i18n="actions.cancel">Cancel</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="app.showAddOrderForm()" class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg">
+                    <i class="fas fa-plus mr-2"></i>
+                    <span data-i18n="actions.addOrder">Add Order</span>
+                </button>
+                <button onclick="app.clearAllFilters()" class="px-4 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-500 transition-colors">
+                    <i class="fas fa-eraser mr-2"></i>
+                    Clear Filters
+                </button>
+                <button onclick="app.toggleView()" class="px-4 py-2 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition-colors">
+                    <i id="viewToggleIcon" class="fas fa-th mr-2"></i>
+                    View
+                </button>
+            </div>
+        </div>
 
-                    <div id="orders-list"></div>
+        <!-- Smart Filters -->
+        <div class="bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-700 mb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="searchInput"
+                           placeholder="Search orders..."
+                           oninput="app.loadOrders()"
+                           class="w-full pl-10 pr-4 py-2 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
                 </div>
+
+                <select id="statusFilter" onchange="app.loadOrders()" class="px-4 py-2 bg-gray-700 border border-gray-600 rounded-xl text-white focus:ring-2 focus:ring-blue-500">
+                    <option value="">All Status</option>
+                    <option value="Ordered">📦 Ordered</option>
+                    <option value="Shipped">🚚 Shipped</option>
+                    <option value="Delivered">✅ Delivered</option>
+                </select>
+
+                <select id="colorFilter" onchange="app.loadOrders()" class="px-4 py-2 bg-gray-700 border border-gray-600 rounded-xl text-white focus:ring-2 focus:ring-blue-500">
+                    <option value="">All Colors</option>
+                </select>
+
+                <select id="sellerFilter" onchange="app.loadOrders()" class="px-4 py-2 bg-gray-700 border border-gray-600 rounded-xl text-white focus:ring-2 focus:ring-blue-500">
+                    <option value="">All Sellers</option>
+                </select>
+
+                <input type="number" id="priceMinFilter" placeholder="Min €"
+                       oninput="app.loadOrders()"
+                       class="px-4 py-2 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500">
+
+                <input type="number" id="priceMaxFilter" placeholder="Max €"
+                       oninput="app.loadOrders()"
+                       class="px-4 py-2 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500">
+            </div>
+        </div>
+
+        <!-- Order Statistics -->
+        <div id="order-stats" class="mb-6"></div>
+    </div>
+
+    <!-- Add Order Form -->
+    <div id="addOrderForm" class="hidden bg-gradient-to-r from-blue-900/50 to-indigo-900/50 rounded-2xl p-6 shadow-xl border border-blue-500/30 mb-6">
+        <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+            <i class="fas fa-plus-circle mr-3 text-blue-400"></i>
+            <span data-i18n="orders.addNew">Add New Order</span>
+        </h3>
+        <form onsubmit="app.addOrder(event)" class="flex flex-col lg:flex-row gap-4">
+            <div class="flex-1 relative">
+                <i class="fas fa-link absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400"></i>
+                <input type="url" id="orderUrl"
+                       placeholder="Enter Kleinanzeigen URL..."
+                       required
+                       class="w-full pl-12 pr-4 py-3 bg-blue-900/30 border border-blue-500/50 rounded-xl text-white placeholder-blue-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all">
+            </div>
+            <div class="flex gap-3">
+                <button type="submit" class="px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-xl hover:from-green-700 hover:to-green-800 transition-all shadow-lg">
+                    <i class="fas fa-save mr-2"></i>
+                    <span data-i18n="actions.save">Save</span>
+                </button>
+                <button type="button" onclick="app.hideAddOrderForm()" class="px-6 py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-times mr-2"></i>
+                    <span data-i18n="actions.cancel">Cancel</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Orders List -->
+    <div id="orders-list"></div>
+</div>
 
                 <!-- Price Watcher Section -->
                 <div id="watcher" class="section hidden">
